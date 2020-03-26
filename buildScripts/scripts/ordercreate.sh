@@ -1,21 +1,27 @@
-cd /var/lib/jenkins/workspace/build_createorderlambda/
+#cd /var/lib/jenkins/workspace/build_createorderlambda/
+if [ ! -d "/var/lib/jenkins/workspace/OrderCreate_Lambda" ]; then
+ cd /var/lib/jenkins/workspace/
+ git clone https://github.com/teamtinvio/OrderCreate_Lambda.git
+fi
+
+git pull origin master 
 mvn clean package
 
 cp target/ordercreate-1.0.0.jar /var/lib/jenkins/workspace/Lambdas
 cd ..
 
 #dldir = "/var/lib/jenkins/workspace/deployment/OrderCreateLambda"
-[ ! -d "/var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLambda" ] && mkdir -p "/var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLambda"
+[ ! -d "/var/lib/jenkins/workspace/deployment/OrderCreateLambda" ] && mkdir -p "/var/lib/jenkins/workspace/deployment/OrderCreateLambda"
 
 # mkdir /var/lib/jenkins/workspace/deployment/OrderCreateLambda
 
-cd /var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLambda
+cd /var/lib/jenkins/workspace/deployment/OrderCreateLambda
 
 #mkdir lib
 
 #cp /var/lib/jenkins/workspace/Libraries/*.jar /var/lib/jenkins/workspace/deployment/ccl/lib/
 
-cp /var/lib/jenkins/workspace/Lambdas/ordercreate-1.0.0.jar /var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLambda
+cp /var/lib/jenkins/workspace/Lambdas/ordercreate-1.0.0.jar /var/lib/jenkins/workspace/deployment/OrderCreateLambda
 
 ArtifactName = $1
 echo $ArtifactName
@@ -38,7 +44,7 @@ zip -r $FileName $ArtifactName
 
 
 
-aws s3 cp /var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLambda/$FileName s3://openlantinviobucket
+aws s3 cp /var/lib/jenkins/workspace/deployment/OrderCreateLambda/$FileName s3://openlantinviobucket
 
 
 
