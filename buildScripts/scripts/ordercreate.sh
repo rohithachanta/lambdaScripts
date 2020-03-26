@@ -1,4 +1,5 @@
 #cd /var/lib/jenkins/workspace/build_createorderlambda/
+cd /var/lib/jenkins/workspace/
 if [ ! -d "/var/lib/jenkins/workspace/OrderCreate_Lambda" ]; then
  cd /var/lib/jenkins/workspace/
  #git clone https://github.com/teamtinvio/OrderCreate_Lambda.git
