@@ -1,6 +1,4 @@
-!#/bin/bash
-
-cd /var/lib/jenkins/workspace/build_createorderlambda/OrderCreate_Lambda/
+cd /var/lib/jenkins/workspace/build_createorderlambda/
 mvn clean package
 
 cp target/ordercreate-1.0.0.jar /var/lib/jenkins/workspace/Lambdas
@@ -20,6 +18,7 @@ cd /var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLamb
 cp /var/lib/jenkins/workspace/Lambdas/ordercreate-1.0.0.jar /var/lib/jenkins/workspace/build_createorderlambda/deployment/OrderCreateLambda
 
 ArtifactName = $1
+echo $ArtifactName
 
 rm -rf $ArtifactName
 
