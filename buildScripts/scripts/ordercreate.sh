@@ -1,7 +1,8 @@
 #cd /var/lib/jenkins/workspace/build_createorderlambda/
 if [ ! -d "/var/lib/jenkins/workspace/OrderCreate_Lambda" ]; then
  cd /var/lib/jenkins/workspace/
- git clone https://github.com/teamtinvio/OrderCreate_Lambda.git
+ #git clone https://github.com/teamtinvio/OrderCreate_Lambda.git
+ git clone git@github.com:teamtinvio/OrderCreate_Lambda.git
 fi
 cd /var/lib/jenkins/workspace/OrderCreate_Lambda
 git pull origin master 
