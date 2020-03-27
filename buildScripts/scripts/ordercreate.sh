@@ -46,12 +46,12 @@ zip -r $FileName $ArtifactName
 
 
 
-aws s3 cp /var/lib/jenkins/workspace/deployment/OrderCreateLambda/$FileName s3://openlantinviobucket
+aws s3 cp /var/lib/jenkins/workspace/deployment/OrderCreateLambda/$FileName s3://tinvio-lambda-build-bucket
 
 
 
 #aws lambda create-function --function-name OrderCreate_Lambda \
-#--code S3Bucket=openlantinviobucket,S3Key=$FileName --handler index.handler --runtime java8 \
+#--code S3Bucket=tinvio-lambda-build-bucket,S3Key=$FileName --handler index.handler --runtime java8 \
 #--timeout 120 --memory-size 2048 \
 #--role arn:aws:iam::895290997849:role/LambdaExecutor 
 
@@ -61,10 +61,10 @@ aws s3 cp /var/lib/jenkins/workspace/deployment/OrderCreateLambda/$FileName s3:/
   aws lambda get-function --function-name OrderCreate_Lambda
   if [ 0 -eq $? ]; then
     aws lambda update-function-code --function-name OrderCreate_Lambda \
-    --s3-bucket openlantinviobucket --s3-key $FileName
+    --s3-bucket tinvio-lambda-build-bucket --s3-key $FileName
   else
      aws lambda create-function --function-name OrderCreate_Lambda \
---code S3Bucket=openlantinviobucket,S3Key=$FileName --handler index.handler --runtime java8 \
+--code S3Bucket=tinvio-lambda-build-bucket,S3Key=$FileName --handler index.handler --runtime java8 \
 --timeout 120 --memory-size 2048 \
 --role arn:aws:iam::895290997849:role/LambdaExecutor
 fi  
